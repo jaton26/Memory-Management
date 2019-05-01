@@ -4,7 +4,7 @@
 
 using namespace std;
 
-struct Memory{
+struct Memory {
   int id, page;
   string action;
   bool started; 
