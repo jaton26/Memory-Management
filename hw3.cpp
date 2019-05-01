@@ -16,12 +16,11 @@ int main(){
   std::string line;
   std::string temp;
   std::vector<Memory> list;
-  int dummy;
-  
+  int page;
 
   while(std::getline(in, line))
   {
-      int page;
+      
       std::istringstream iss(line);
 
       std::getline(iss,temp,' ');
@@ -31,18 +30,40 @@ int main(){
       if (std::getline(iss,temp,' ')) {
 	page = std::stoi(temp);
       } else {
-	page = dummy;
+	page = 0;
       }
       cout << id << " ";
       cout << action << " ";
-      if (page)
+      if (page != 0)
         cout << page;
       cout << endl;
       
       
-      //Memory newJob(id, action, page);
-      //list.push_back(newJob);
+      Memory newJob(id, action, page);
+      list.push_back(newJob);
       i++;
   }
+  size = i;
+
+
   return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
