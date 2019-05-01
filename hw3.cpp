@@ -16,18 +16,27 @@ int main(){
   std::string line;
   std::string temp;
   std::vector<Memory> list;
+  int page = 0;
 
   while(std::getline(in, line))
   {
       std::istringstream iss(line);
+
       std::getline(iss,temp,' ');
       int id = std::stoi(temp);
       std::getline(iss,temp,' ');
       std::string action = temp;
-      std::getline(iss,temp,' ');
-      //int page = std::stoi(temp);
-      cout << action << endl;
-      cout << id << endl;
+      if (std::getline(iss,temp,' ')) {
+	page = std::stoi(temp);
+      } else {
+        page = 0;
+      }
+      cout << id << " ";
+      cout << action << " ";
+      if (page != 0)
+        cout << page;
+      cout << endl;
+      
       
       //Memory newJob(id, action, page);
       //list.push_back(newJob);
