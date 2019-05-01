@@ -25,9 +25,14 @@ int main(){
       std::getline(iss,temp,' ');
       std::string action = temp;
       std::getline(iss,temp,' ');
+      if(&temp != nullptr){
+        int page = std::stoi(temp);
+        cout << page << endl;
+      }
       //int page = std::stoi(temp);
       cout << action << endl;
       cout << id << endl;
+      //cout << page << endl;
       
       //Memory newJob(id, action, page);
       //list.push_back(newJob);
