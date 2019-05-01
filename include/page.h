@@ -7,6 +7,9 @@ public:
 	void read(int time);
 	void write(int time);
 	bool isDirty();
+
+	void toSwap();
+	void toMem();
 	bool isSwapped();
 
 private:
