@@ -1,11 +1,11 @@
 #include <iostream>
-#include "Memory.h"
 #include <vector>
 #include <fstream>
 #include <string>
 #include <sstream>
 #include <algorithm>
-#include <queue> 
+#include <queue>
+#include "memory.h"
 
 using namespace std;
 
