@@ -16,10 +16,12 @@ int main(){
   std::string line;
   std::string temp;
   std::vector<Memory> list;
-  int page = 0;
+  int dummy;
+  
 
   while(std::getline(in, line))
   {
+      int page;
       std::istringstream iss(line);
 
       std::getline(iss,temp,' ');
@@ -29,11 +31,11 @@ int main(){
       if (std::getline(iss,temp,' ')) {
 	page = std::stoi(temp);
       } else {
-        page = 0;
+	page = dummy;
       }
       cout << id << " ";
       cout << action << " ";
-      if (page != 0)
+      if (page)
         cout << page;
       cout << endl;
       
