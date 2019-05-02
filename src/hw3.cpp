@@ -13,14 +13,15 @@ using namespace std;
 
 void making_page_list(vector<Memory> ready, int size){
   vector<Page> final_list;
+  cout << list->id;
   vector<Page> table; //This will hold the 20 physical page table data. 
   int count = 1; //Will keep track of which page will be ued next. 
   for(int i = 0; i < size; i++){
     Memory *line = &ready[i];
     Page *final_line;
-    if(line->action == "A"){
-      final_line->id = line->id;
-      final_line->virt_add = line->virt_add;
+    if(list->action == "A"){
+      final_line->id = list->id;
+      final_line->virt_add = list->virt_add;
       final_line->physical = count;
       count++;
     }
