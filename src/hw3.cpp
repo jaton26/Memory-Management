@@ -75,15 +75,17 @@ int main(){
   policies[2] = new OS(OS::ran, memSize);
 
   while(std::getline(in, line)){
+    int virAdd = 0;
     std::istringstream iss(line);
     std::getline(iss,temp,' ');
     int id = std::stoi(temp);
     std::getline(iss,temp,' ');
     std::string action = temp;
     if(std::getline(iss,temp,' ')){
-      int virAdd = std::stoi(temp);
+      virAdd = std::stoi(temp);
       cout << virAdd << " ";
     }
+
     cout << id << " ";
     cout << action << endl;
 
@@ -91,13 +93,16 @@ int main(){
       switch(action[0]) {
         case 'C':
           cout << "Process has been created. " << endl;
-          //policies[i].createProcess(id);
+          policies[i]->createProcess(id);
           break;
         case 'T':
+          policies[i]->kill(id);
           break;
         case 'A':
+          policies[i]->allocate(id, virAdd);
           break;
         case 'R':
+
           break;
         case 'W':
           break;
@@ -106,12 +111,7 @@ int main(){
         default:
           cout << "Error. ";
       }
-    }
-      
-      //cout << "ID: " << newJob.id << endl;
-      //cout << "Action: " << newJob.action << endl;
-      //cout << "Virtual Address: " << newJob.virt_add << endl;
-      //cout << "Time: " << newJob.time << endl << endl; 
+    } 
   }
   //making_page_list(list, i);
   //fifoSwap(list, time);
