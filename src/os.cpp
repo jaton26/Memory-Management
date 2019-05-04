@@ -43,14 +43,6 @@ void OS::allocate(int id, int virAdd){
 
 }
 
-void OS::read(int time, int id, int virAdd){
-
-}
-
-void OS::write(int time, int id, int virAdd){
-
-}
-
 void OS::free(int time, int id, int virAdd){
 
 }
