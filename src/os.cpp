@@ -4,6 +4,7 @@ OS::OS(SwapPolicy policy, int memSize){
 	pMem = new Page*[memSize];
 	this->policy = policy;
 	this->memSize = memSize;
+	phyCount = 0;
 }
 
 void OS::createProcess(int id){
@@ -49,7 +50,20 @@ void OS::rw(int &time, int &id, int &virAdd, RW opp){
 }
 
 void OS::allocate(int id, int virAdd){
-	//Page* currPage = 
+	
+	//TODO: find process using map
+	Process* currPro = processList[id];
+	currPro->id = id;
+
+	Page* newP = new Page(virAdd);
+
+	if(phyCount == memSize)
+		swap(newP);
+	//increment count to record size of physical memory
+	phyCount++;
+	//add page
+	addPage(newP);
+	
 
 }
 
