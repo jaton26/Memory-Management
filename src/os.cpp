@@ -1,7 +1,7 @@
 #include "os.h"
 
-OS::OS(int memSize){
-	pMem = new Page[memSize];
+OS::OS(SwapPolicy policy, int memSize){
+	pMem = new Page*[memSize];
 	policy = OS::SwapPolicy::lru;
 }
 

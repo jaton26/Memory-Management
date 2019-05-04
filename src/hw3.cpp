@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <queue>
 #include "memory.h"
+#include "os.h"
 
 using namespace std;
 
@@ -18,6 +19,11 @@ int main(){
   std::vector<Memory> list;
   int dummy;
   
+  int memSize = 20;
+  OS*policies[3];
+  policies[0] = new OS(OS::SwapPolicy::fifo, memSize);
+  policies[0] = new OS(OS::SwapPolicy::lru, memSize);
+  policies[0] = new OS(OS::SwapPolicy::fifo, memSize);
 
   while(std::getline(in, line))
   {

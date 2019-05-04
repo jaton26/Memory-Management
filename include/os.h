@@ -6,11 +6,14 @@
 #include "process.h"
 #include "page.h"
 
-enum swapPolicy { fifo, lru, ran };
+
 
 class OS{
 public:
-	OS(swapPolicy policy, int memSize);
+	enum SwapPolicy { fifo, lru, ran };
+
+	OS(SwapPolicy policy, int memSize);
+	//void setPolicy(swapPolicy);
 	void createProcess(int id);
 	void allocate(int id, int virAdd);
 	void read(int time, int id, int virAdd);
@@ -22,9 +25,9 @@ public:
 private:
 	Page* getPage(int id, int virAdd);
 	std::map<int, Process*> processList; //with procress id being the key
-	swapPolicy policy;
+	SwapPolicy policy;
 	int memSize;
-	Page* pMem; //array of pages as physical Memory
+	Page** pMem; //array of pages as physical Memory
 
 	std::vector<Page> swapMem;	//swap memory
 
