@@ -1,14 +1,22 @@
 #include <iostream>
+<<<<<<< HEAD
 <<<<<<< HEAD:hw3.cpp
 #include "Memory.h"
 #include "Page.h"
 =======
 >>>>>>> master:src/hw3.cpp
+=======
+#include "Memory.h"
+#include "page.h"
+#include "Table.h"
+#include "os.h"
+>>>>>>> 7e12a2285dddb50f5aad5f6688b6597f06e96cf9
 #include <vector>
 #include <fstream>
 #include <string>
 #include <sstream>
 #include <algorithm>
+<<<<<<< HEAD
 <<<<<<< HEAD:hw3.cpp
 #include <queue> 
 #define MAX 19
@@ -17,9 +25,63 @@
 #include "memory.h"
 #include "os.h"
 >>>>>>> master:src/hw3.cpp
+=======
+#include <queue> 
+#define MAX 19
+>>>>>>> 7e12a2285dddb50f5aad5f6688b6597f06e96cf9
 
 using namespace std;
+/*
+void fifoSwap(std::vector<Memory> ready_list, int time){
+  std::vector<Memory> final_list;
+  int i = 0; //Keeps track of iterating vector. 
+  int count = 1; //Keeps track of final_list. Can only go up to 19. 
 
+  while(!ready_list.empty()){
+    Memory *line = &ready_list[i];
+    if(line->action == "C"){
+      line->started = true;
+      final_list.push_back(*line);
+
+      Memory *line = &final_list[i];
+      cout << "CREATE: " << line->started << endl;
+
+      ready_list.erase(ready_list.begin());
+    }
+
+    else if(line->action == "A"){
+      line->phys_add = count;
+      //i++;
+      count++;
+      final_list.push_back(*line);
+      ready_list.erase(ready_list.begin());
+
+      Memory *line = &final_list[i];
+      cout << "PHYSICAL: " << line->phys_add << endl;
+      cout << ready_list.size() << endl << endl;
+    }
+
+    else if(line->action == "R"){
+      int loopIterator = 0; //Loops to find the VA that wants to read from. 
+      Memory *temp = &final_list[loopIterator];
+      int size = final_list.size();
+      while(loopIterator != size){
+        cout << "WHY????" << endl;
+        if(temp->virt_add == line->virt_add){
+          line->read = line->time;
+          final_list.push_back(*line);
+          ready_list.erase(ready_list.begin());
+          Memory *line = &final_list[loopIterator];
+          cout << "READ: " << line->read << endl;
+        }
+        loopIterator++;
+        Memory *temp = &final_list[loopIterator];
+      }
+    }
+
+  }
+
+<<<<<<< HEAD
 void making_page_list(vector<Memory> ready, int size){
   vector<Page> final_list;
   //cout << list->id;
@@ -40,9 +102,13 @@ void making_page_list(vector<Memory> ready, int size){
   }
 }
 
+=======
+}
+*/
+>>>>>>> 7e12a2285dddb50f5aad5f6688b6597f06e96cf9
 int main(){
   int size;
-  int i = 0;
+  int time = 1;
   ifstream in("memory.dat");
   std::string line;
   std::string temp;
@@ -57,6 +123,7 @@ int main(){
 
   while(std::getline(in, line))
   {
+<<<<<<< HEAD
       int virt_add;
       std::istringstream iss(line);
 
@@ -89,5 +156,16 @@ int main(){
 =======
 
 >>>>>>> master:src/hw3.cpp
+=======
+  
+      
+      //cout << "ID: " << newJob.id << endl;
+      //cout << "Action: " << newJob.action << endl;
+      //cout << "Virtual Address: " << newJob.virt_add << endl;
+      //cout << "Time: " << newJob.time << endl << endl; 
+  }
+  //making_page_list(list, i);
+  //fifoSwap(list, time);
+>>>>>>> 7e12a2285dddb50f5aad5f6688b6597f06e96cf9
   return 0;
 }
