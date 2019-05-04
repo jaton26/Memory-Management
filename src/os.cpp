@@ -2,7 +2,8 @@
 
 OS::OS(SwapPolicy policy, int memSize){
 	pMem = new Page*[memSize];
-	policy = OS::SwapPolicy::lru;
+	this->policy = policy;
+	this->memSize = memSize;
 }
 
 void OS::createProcess(int id){
