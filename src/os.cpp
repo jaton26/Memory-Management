@@ -89,6 +89,14 @@ void OS::print(){
 //TODO: OS::swap
 void OS::swap(Page* target){
 	int indexToSwap;
+	bool foundNotDirty = false;
+	for(int i = 0; i < memSize && !foundNotDirty; i++){
+		if(pMem[i]->isDirty()){
+			indexToSwap = i;
+			foundNotDirty = true;
+		}
+	}
+
 	switch(policy){
 		case fifo: indexToSwap = getIndexFifo(); break;
 		case lru: indexToSwap = getIndexLru(); break;
