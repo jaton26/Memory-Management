@@ -17,7 +17,6 @@ Page* OS::getPage(int id, int virAdd){
 	return NULL;
 }
 
-//What do you mean swap back to memory?
 void OS::read(int time, int id, int virAdd){
 
 	Page* currPage = getPage(id, virAdd);

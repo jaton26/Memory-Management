@@ -17,7 +17,12 @@ Page* Process::free(int virAdd){
 	pageTable.erase(virAdd);
 	return temp;
 }
-	
+
+
+Page* Process::getPage(int virAdd){
+	return pageTable[virAdd];
+}
+
 std::string Process::printPageTable(){
 	std::stringstream ss;
 	ss << "PROCESS " << id << "\n";

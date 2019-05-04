@@ -11,6 +11,7 @@ public:
 	int getId();
 	void addPage(Page*);
 	Page* free(int virAdd);
+	Page* getPage(int virAdd);
 	std::string printPageTable();
 
 private:
