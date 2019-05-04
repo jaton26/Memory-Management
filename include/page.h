@@ -3,6 +3,7 @@
 
 class Page{
 public:
+	Page();
 	Page(int processId, int virAdd);
 	void read(int time);
 	void write(int time);

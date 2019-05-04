@@ -1,5 +1,10 @@
 #include "os.h"
 
+OS::OS(int memSize){
+	pMem = new Page[memSize];
+	policy = OS::SwapPolicy::lru;
+}
+
 void OS::createProcess(int id){
 	Process* newP = new Process(id);
 	processList[id] = newP;
