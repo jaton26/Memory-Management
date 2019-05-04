@@ -1,5 +1,10 @@
 #include "os.h"
 
+void OS::createProcess(int id){
+	Process* newP = new Process(id);
+	processList[id] = newP;
+}
+
 Page* OS::getPage(int id, int virAdd){
 	//TODO: Find procress by id
 	//TODO: get page by virAdd

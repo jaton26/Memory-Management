@@ -5,9 +5,9 @@
 #include <map>
 #include "page.h"
 
-class Procress{
+class Process{
 public:
-	Procress(int id): id(id){};
+	Process(int id): id(id){};
 	int getId();
 	void addPage(Page);
 	void removePage(Page* pageAdd);
