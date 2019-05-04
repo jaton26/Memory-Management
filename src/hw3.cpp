@@ -1,13 +1,22 @@
 #include <iostream>
+<<<<<<< HEAD:hw3.cpp
 #include "Memory.h"
 #include "Page.h"
+=======
+>>>>>>> master:src/hw3.cpp
 #include <vector>
 #include <fstream>
 #include <string>
 #include <sstream>
 #include <algorithm>
+<<<<<<< HEAD:hw3.cpp
 #include <queue> 
 #define MAX 19
+=======
+#include <queue>
+#include "memory.h"
+#include "os.h"
+>>>>>>> master:src/hw3.cpp
 
 using namespace std;
 
@@ -40,6 +49,11 @@ int main(){
   std::vector<Memory> list;
   int dummy = 0;
   
+  int memSize = 20;
+  OS*policies[3];
+  policies[0] = new OS(OS::SwapPolicy::fifo, memSize);
+  policies[0] = new OS(OS::SwapPolicy::lru, memSize);
+  policies[0] = new OS(OS::SwapPolicy::fifo, memSize);
 
   while(std::getline(in, line))
   {
@@ -70,6 +84,10 @@ int main(){
       //cout << "Action: " << newJob.action << endl;
       //cout << "Virtual Address: " << newJob.virt_add << endl << endl;
   }
+<<<<<<< HEAD:hw3.cpp
   making_page_list(list, i);
+=======
+
+>>>>>>> master:src/hw3.cpp
   return 0;
 }
