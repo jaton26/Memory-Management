@@ -66,6 +66,7 @@ int main(){
   ifstream in("memory.dat");
   std::string line;
   std::string temp;
+  int time = 0;
   //std::vector<Memory> list;
   
   int memSize = 20;
@@ -92,7 +93,6 @@ int main(){
     for(int i = 0; i < 3; i++){
       switch(action[0]) {
         case 'C':
-          cout << "Process has been created. " << endl;
           policies[i]->createProcess(id);
           break;
         case 'T':
@@ -102,16 +102,19 @@ int main(){
           policies[i]->allocate(id, virAdd);
           break;
         case 'R':
-
+          policies[i]->read(time, id, virAdd);
           break;
         case 'W':
+          policies[i]->write(time, id, virAdd);
           break;
         case 'F':
+          policies[i]->free(time, id, virAdd);
           break;
         default:
           cout << "Error. ";
       }
     } 
+    time++;
   }
   //making_page_list(list, i);
   //fifoSwap(list, time);
