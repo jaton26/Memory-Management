@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Memory.hpp"
+//#include "Memory.hpp"
 #include "page.hpp"
 #include "os.hpp"
 #include <vector>
@@ -8,7 +8,6 @@
 #include <sstream>
 #include <algorithm>
 #include <queue> 
-#define MAX 19
 
 using namespace std;
 /*
@@ -64,23 +63,50 @@ void fifoSwap(std::vector<Memory> ready_list, int time){
 }
 */
 int main(){
-  int size;
-  int time = 1;
   ifstream in("memory.dat");
   std::string line;
   std::string temp;
-  std::vector<Memory> list;
-  int dummy = 0;
+  //std::vector<Memory> list;
   
   int memSize = 20;
   OS*policies[3];
-  policies[0] = new OS(OS::SwapPolicy::fifo, memSize);
-  policies[1] = new OS(OS::SwapPolicy::lru, memSize);
-  policies[2] = new OS(OS::SwapPolicy::fifo, memSize);
+  policies[0] = new OS(OS::fifo, memSize);
+  policies[1] = new OS(OS::lru, memSize);
+  policies[2] = new OS(OS::ran, memSize);
 
-  while(std::getline(in, line))
-  {
-    
+  while(std::getline(in, line)){
+    std::istringstream iss(line);
+    std::getline(iss,temp,' ');
+    int id = std::stoi(temp);
+    std::getline(iss,temp,' ');
+    std::string action = temp;
+    if(std::getline(iss,temp,' ')){
+      int virAdd = std::stoi(temp);
+      cout << virAdd << " ";
+    }
+    cout << id << " ";
+    cout << action << endl;
+
+    for(int i = 0; i < 3; i++){
+      switch(action[0]) {
+        case 'C':
+          cout << "Process has been created. " << endl;
+          //policies[i].createProcess(id);
+          break;
+        case 'T':
+          break;
+        case 'A':
+          break;
+        case 'R':
+          break;
+        case 'W':
+          break;
+        case 'F':
+          break;
+        default:
+          cout << "Error. ";
+      }
+    }
       
       //cout << "ID: " << newJob.id << endl;
       //cout << "Action: " << newJob.action << endl;
