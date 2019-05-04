@@ -5,10 +5,12 @@
 using namespace std;
 
 struct Memory {
-  int id, page;
+  int id, virt_add, time, phys_add;
+  int read, write;
+  bool dirty;
   string action;
   bool started; 
-  Memory(int id, string action, int page): id(id), action (action),  page (page), started(false) {};
+  Memory(int id, string action, int virt_add, int time): id(id), action (action), virt_add (virt_add), started(false), time (time) {};
   
 };
 

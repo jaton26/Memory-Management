@@ -16,6 +16,7 @@ Page* OS::getPage(int id, int virAdd){
 	return NULL;
 }
 
+//What do you mean swap back to memory?
 void OS::read(int time, int id, int virAdd){
 
 	Page* currPage = getPage(id, virAdd);
@@ -35,4 +36,29 @@ void OS::write(int time, int id, int virAdd){
 	//else
 	//TODO: Check if in swap, if it is, swap back to memory
 	currPage->write(time);
+}
+
+void OS::allocate(int id, int virAdd){
+	//Page* currPage = 
+
+}
+
+void OS::read(int time, int id, int virAdd){
+
+}
+
+void OS::write(int time, int id, int virAdd){
+
+}
+
+void OS::free(int time, int id, int virAdd){
+
+}
+
+void OS::kill(int id){
+
+}
+
+void OS::print(){
+	
 }
