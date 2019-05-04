@@ -36,6 +36,7 @@ private:
 	int getIndexFifo();
 	int getIndexLru();
 	int getIndexRan();
+	void fromSwapToPhy(Page* target);
 
 };
 

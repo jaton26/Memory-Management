@@ -41,7 +41,7 @@ void OS::rw(int &time, int &id, int &virAdd, RW opp){
 
 	//swap back to memory if page is in swap memory
 	if(currPage->isSwapped())
-		swap(currPage);
+		fromSwapToPhy(currPage);
 
 	if(opp == r)
 		currPage->read(time);
@@ -51,12 +51,12 @@ void OS::rw(int &time, int &id, int &virAdd, RW opp){
 
 void OS::allocate(int id, int virAdd){
 	
-	//TODO: find process using map
+	//find process using map
 	Process* currPro = processList[id];
 
 	Page* newP = new Page(id, virAdd);
 
-	if(phyCount == memSize)
+	if(phyCount == memSize) //if swap is required
 		swap(newP);
 	//increment count to record size of physical memory
 	phyCount++;
@@ -67,15 +67,19 @@ void OS::allocate(int id, int virAdd){
 }
 
 void OS::free(int time, int id, int virAdd){
-	//swap???
-	Process* currPro = processList[id];
-	Page* temp = currPro->free(virAdd);
-	//if(temp->isSwapped())
-		//find page in swap mem
-		//remove page from swap mem
+	Process* currPro = processList[id];// get procress
+	Page* temp = currPro->free(virAdd); //remove page from pageTable
+	if (temp == NULL){ //kill procress if page doesnt exist
+		kill(id);
+		return;
+	}
 
-	//phyCount--
+	if(temp->isSwapped())
+		fromSwapToPhy(temp);
+
+	int pIndex = temp->getPhyAdd();
 	delete temp;
+	pMem[pIndex] = NULL;
 }
 
 void OS::kill(int id){
@@ -86,10 +90,24 @@ void OS::print(){
 	
 }
 
+void OS::fromSwapToPhy(Page* target){
+	//find and remove target from swap memory
+	for(int i = 0; i < swapMem.size(); i++){
+		if (swapMem[i] == target){
+			swapMem.erase(swapMem.begin()+i);
+			break;
+		}
+	}
+	//put target to physical memory
+  	swap(target);
+}
+
 //TODO: OS::swap
 void OS::swap(Page* target){
 	int indexToSwap;
 	bool foundNotDirty = false;
+
+	//find dirty page
 	for(int i = 0; i < memSize && !foundNotDirty; i++){
 		if(pMem[i]->isDirty()){
 			indexToSwap = i;
@@ -97,14 +115,20 @@ void OS::swap(Page* target){
 		}
 	}
 
-	switch(policy){
-		case fifo: indexToSwap = getIndexFifo(); break;
-		case lru: indexToSwap = getIndexLru(); break;
-		case ran: indexToSwap = getIndexRan(); break;	
+	if(!foundNotDirty){ // do policy if no dirty page found
+		switch(policy){
+			case fifo: indexToSwap = getIndexFifo(); break;
+			case lru: indexToSwap = getIndexLru(); break;
+			case ran: indexToSwap = getIndexRan(); break;	
+		}
 	}
-	Page* swapOut = pMem[indexToSwap];
-	swapMem.push_back(swapOut);
-	pMem[indexToSwap] = target;
+
+	Page* swapOut = pMem[indexToSwap]; //get page to swap out
+	swapOut->toSwap();
+	swapMem.push_back(swapOut); //push to swap memory
+	
+	target->toPhysical(indexToSwap);
+	pMem[indexToSwap] = target; //put in physical memory
 }
 
 int OS::getIndexFifo(){
