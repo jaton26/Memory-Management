@@ -1,6 +1,11 @@
 #include "os.h"
 
 //Does each process have their own id? Or is it 100, 200, etc?
+void OS::createProcess(int id){
+	Process* newP = new Process(id);
+	processList[id] = newP;
+}
+
 Page* OS::getPage(int id, int virAdd){
 	//TODO: Find procress by id
 	//TODO: get page by virAdd
@@ -27,4 +32,29 @@ void OS::write(int time, int id, int virAdd){
 	//else
 	//TODO: Check if in swap, if it is, swap back to memory
 	currPage->write(time);
+}
+
+void OS::allocate(int id, int virAdd){
+	//Page* currPage = 
+
+}
+
+void OS::read(int time, int id, int virAdd){
+
+}
+
+void OS::write(int time, int id, int virAdd){
+
+}
+
+void OS::free(int time, int id, int virAdd){
+
+}
+
+void OS::kill(int id){
+
+}
+
+void OS::print(){
+	
 }

@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <map>
-#include "procress.h"
+#include "process.h"
 #include "page.h"
 
 enum swapPolicy { fifo, lru, ran };
@@ -11,7 +11,7 @@ enum swapPolicy { fifo, lru, ran };
 class OS{
 public:
 	OS(swapPolicy policy, int memSize);
-	void createProcress(int id);
+	void createProcess(int id);
 	void allocate(int id, int virAdd);
 	void read(int time, int id, int virAdd);
 	void write(int time, int id, int virAdd);
@@ -21,7 +21,7 @@ public:
 
 private:
 	Page* getPage(int id, int virAdd);
-	std::map<int, Procress> procressList; //with procress id being the key
+	std::map<int, Process*> processList; //with procress id being the key
 	swapPolicy policy;
 	int memSize;
 	Page* pMem; //array of pages as physical Memory

@@ -61,8 +61,9 @@ void fifoSwap(std::vector<Memory> ready_list, int time){
     }
 
   }
-*/
+
 }
+*/
 int main(){
   int size;
   int time = 1;
@@ -75,29 +76,7 @@ int main(){
 
   while(std::getline(in, line))
   {
-      int virt_add;
-      std::istringstream iss(line);
-
-      std::getline(iss,temp,' ');
-      int id = std::stoi(temp);
-      std::getline(iss,temp,' ');
-      std::string action = temp;
-      if (std::getline(iss,temp,' ')) {
-	virt_add = std::stoi(temp);
-      } 
-      else {
-	virt_add = dummy;
-      }
-      cout << id << " ";
-      cout << action << " ";
-      if (virt_add)
-        cout << virt_add;
-      cout << endl;
-      
-      
-      Memory newJob(id, action, virt_add, time);
-      list.push_back(newJob);
-      time++;
+  
       
       //cout << "ID: " << newJob.id << endl;
       //cout << "Action: " << newJob.action << endl;
@@ -105,6 +84,6 @@ int main(){
       //cout << "Time: " << newJob.time << endl << endl; 
   }
   //making_page_list(list, i);
-  fifoSwap(list, time);
+  //fifoSwap(list, time);
   return 0;
 }
