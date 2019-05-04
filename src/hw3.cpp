@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Memory.h"
-#include "Page.h"
+#include "page.h"
+#include "Table.h"
+#include "os.h"
 #include <vector>
 #include <fstream>
 #include <string>
@@ -10,31 +12,60 @@
 #define MAX 19
 
 using namespace std;
+/*
+void fifoSwap(std::vector<Memory> ready_list, int time){
+  std::vector<Memory> final_list;
+  int i = 0; //Keeps track of iterating vector. 
+  int count = 1; //Keeps track of final_list. Can only go up to 19. 
 
-void making_page_list(vector<Memory> ready, int size){
-  vector<Page> final_list;
-  //cout << list->id;
-  Memory *list;
-  vector<Page> table; //This will hold the 20 physical page table data. 
-  int count = 1; //Will keep track of which page will be ued next. 
-  for(int i = 0; i < size; i++){
-    Memory *line = &ready[i];
-    Page *final_line;
-    if(list->action == "A"){
-      final_line->id = list->id;
-      final_line->virt_add = list->virt_add;
-      final_line->physical = count;
+  while(!ready_list.empty()){
+    Memory *line = &ready_list[i];
+    if(line->action == "C"){
+      line->started = true;
+      final_list.push_back(*line);
+
+      Memory *line = &final_list[i];
+      cout << "CREATE: " << line->started << endl;
+
+      ready_list.erase(ready_list.begin());
+    }
+
+    else if(line->action == "A"){
+      line->phys_add = count;
+      //i++;
       count++;
-    }
-    else if(list->action == "W"){
-      
-    }
-  }
-}
+      final_list.push_back(*line);
+      ready_list.erase(ready_list.begin());
 
+      Memory *line = &final_list[i];
+      cout << "PHYSICAL: " << line->phys_add << endl;
+      cout << ready_list.size() << endl << endl;
+    }
+
+    else if(line->action == "R"){
+      int loopIterator = 0; //Loops to find the VA that wants to read from. 
+      Memory *temp = &final_list[loopIterator];
+      int size = final_list.size();
+      while(loopIterator != size){
+        cout << "WHY????" << endl;
+        if(temp->virt_add == line->virt_add){
+          line->read = line->time;
+          final_list.push_back(*line);
+          ready_list.erase(ready_list.begin());
+          Memory *line = &final_list[loopIterator];
+          cout << "READ: " << line->read << endl;
+        }
+        loopIterator++;
+        Memory *temp = &final_list[loopIterator];
+      }
+    }
+
+  }
+*/
+}
 int main(){
   int size;
-  int i = 0;
+  int time = 1;
   ifstream in("memory.dat");
   std::string line;
   std::string temp;
@@ -64,13 +95,16 @@ int main(){
       cout << endl;
       
       
-      Memory newJob(id, action, virt_add);
+      Memory newJob(id, action, virt_add, time);
       list.push_back(newJob);
-      i++;
+      time++;
+      
       //cout << "ID: " << newJob.id << endl;
       //cout << "Action: " << newJob.action << endl;
-      //cout << "Virtual Address: " << newJob.virt_add << endl << endl;
+      //cout << "Virtual Address: " << newJob.virt_add << endl;
+      //cout << "Time: " << newJob.time << endl << endl; 
   }
-  making_page_list(list, i);
+  //making_page_list(list, i);
+  fifoSwap(list, time);
   return 0;
 }
