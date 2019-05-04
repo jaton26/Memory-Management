@@ -68,7 +68,15 @@ void OS::allocate(int id, int virAdd){
 }
 
 void OS::free(int time, int id, int virAdd){
+	//swap???
+	Process* currPro = processList[id];
+	Page* temp = currPro->free(virAdd);
+	//if(temp->isSwapped())
+		//find page in swap mem
+		//remove page from swap mem
 
+	//phyCount--
+	delete temp;
 }
 
 void OS::kill(int id){
@@ -81,5 +89,28 @@ void OS::print(){
 
 //TODO: OS::swap
 void OS::swap(Page* target){
+	int indexToSwap;
+	switch(policy){
+		case fifo: indexToSwap = getIndexFifo(); break;
+		case lru: indexToSwap = getIndexLru(); break;
+		case ran: indexToSwap = getIndexRan(); break;	
+	}
+	Page* swapOut = pMem[indexToSwap];
+	swapMem.push_back(swapOut);
+	pMem[indexToSwap] = target;
+}
+
+int OS::getIndexFifo(){
 	
+	return 0;	
+}
+
+int OS::getIndexLru(){
+	
+	return 0;	
+}
+
+int OS::getIndexRan(){
+	
+	return 0;	
 }
