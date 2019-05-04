@@ -1,8 +1,7 @@
 #include <iostream>
-#include "Memory.h"
-#include "page.h"
-#include "Table.h"
-#include "os.h"
+#include "Memory.hpp"
+#include "page.hpp"
+#include "os.hpp"
 #include <vector>
 #include <fstream>
 #include <string>

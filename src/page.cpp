@@ -1,4 +1,4 @@
-#include "page.h"
+#include "page.hpp"
 
 
 Page::Page(int processId, int virAdd){

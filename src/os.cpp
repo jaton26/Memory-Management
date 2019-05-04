@@ -1,4 +1,4 @@
-#include "os.h"
+#include "os.hpp"
 
 OS::OS(SwapPolicy policy, int memSize){
 	pMem = new Page*[memSize];
