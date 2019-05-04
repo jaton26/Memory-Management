@@ -9,13 +9,14 @@ class Process{
 public:
 	Process(int id): id(id){};
 	int getId();
-	void addPage(Page);
-	void removePage(Page* pageAdd);
-	void printPageTable();
+	void addPage(Page*);
+	Page* free(int virAdd);
+	Page* getPage(int virAdd);
+	std::string printPageTable();
 
 private:
 	int id;
-	std::map<int, Page> pageTable; //with virtual address being key
+	std::map<int, Page*> pageTable; //with virtual address being key
 };
 
 #endif

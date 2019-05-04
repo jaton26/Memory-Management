@@ -5,12 +5,14 @@ class Page{
 public:
 	Page();
 	Page(int processId, int virAdd);
+	int getVirAdd();
+	int getPhyAdd();
 	void read(int time);
 	void write(int time);
 	bool isDirty();
 	
 	void toSwap();
-	void toMem();
+	void toPhysical(int physical);
 	bool isSwapped();
 
 private:
@@ -19,6 +21,7 @@ private:
 	int lastRW;
 	bool dirty;
 	bool swapped;
+	int phyAdd; //physical address
 };
 
 #endif

@@ -6,6 +6,14 @@ Page::Page(int processId, int virAdd){
 	this->virAdd = virAdd;
 }
 
+int Page::getVirAdd(){
+	return virAdd;
+}
+
+int Page::getPhyAdd(){
+	return phyAdd;
+}
+
 void Page::read(int time){
 	lastRW = time;
 };
@@ -24,8 +32,9 @@ void Page::toSwap(){
 }
 
 
-void Page::toMem(){
+void Page::toPhysical(int physical){
 	swapped = false;
+	phyAdd = physical;
 }
 
 bool Page::isSwapped(){
