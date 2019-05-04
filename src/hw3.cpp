@@ -76,8 +76,8 @@ int main(){
   int memSize = 20;
   OS*policies[3];
   policies[0] = new OS(OS::SwapPolicy::fifo, memSize);
-  policies[0] = new OS(OS::SwapPolicy::lru, memSize);
-  policies[0] = new OS(OS::SwapPolicy::fifo, memSize);
+  policies[1] = new OS(OS::SwapPolicy::lru, memSize);
+  policies[2] = new OS(OS::SwapPolicy::fifo, memSize);
 
   while(std::getline(in, line))
   {
