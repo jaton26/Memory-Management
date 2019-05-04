@@ -26,6 +26,7 @@ private:
 	std::map<int, Process*> processList; //with procress id being the key
 	SwapPolicy policy;
 	int memSize;
+	int phyCount = 0;
 	Page** pMem; //array of pages as physical Memory
 	std::vector<Page*> swapMem;	//swap memory
 

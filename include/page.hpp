@@ -3,7 +3,6 @@
 
 class Page{
 public:
-	Page();
 	Page(int processId, int virAdd);
 	int getVirAdd();
 	int getPhyAdd();

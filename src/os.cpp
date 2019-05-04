@@ -53,16 +53,15 @@ void OS::allocate(int id, int virAdd){
 	
 	//TODO: find process using map
 	Process* currPro = processList[id];
-	currPro->id = id;
 
-	Page* newP = new Page(virAdd);
+	Page* newP = new Page(id, virAdd);
 
 	if(phyCount == memSize)
 		swap(newP);
 	//increment count to record size of physical memory
 	phyCount++;
 	//add page
-	addPage(newP);
+	currPro->addPage(newP);
 	
 
 }
