@@ -81,7 +81,7 @@ int main(){
 
   while(std::getline(in, line))
   {
-  
+    
       
       //cout << "ID: " << newJob.id << endl;
       //cout << "Action: " << newJob.action << endl;
