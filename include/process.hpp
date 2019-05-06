@@ -12,7 +12,10 @@ public:
 	void addPage(Page*);
 	Page* free(int virAdd);
 	Page* getPage(int virAdd);
-	std::string printPageTable();
+	void getPageCount();
+	std::string getPageTable();
+	bool empty(){return pageTable.size() == 0; };
+	int getOneVirAdd();
 
 private:
 	int id;

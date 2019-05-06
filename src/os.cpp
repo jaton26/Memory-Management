@@ -83,7 +83,10 @@ void OS::free(int time, int id, int virAdd){
 }
 
 void OS::kill(int id){
-
+	Process* curr = processList[id];
+	while(!curr->empty()){
+		free(0, id, curr->getOneVirAdd());
+	}
 }
 
 void OS::print(){
