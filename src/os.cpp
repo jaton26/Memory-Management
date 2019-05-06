@@ -54,6 +54,8 @@ void OS::allocate(int id, int virAdd){
 }
 
 void OS::free(int time, int id, int virAdd){
+	//Page* currPage = getPage(id, virAdd);
+	
 
 }
 
@@ -61,7 +63,7 @@ void OS::kill(int id){
 
 }
 
-void OS::print(){
+string OS::print(){
 	
 }
 
