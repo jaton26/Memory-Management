@@ -98,23 +98,24 @@ void OS::kill(int id){
 }
 
 std::string OS::print(){
-	std::stringstream ss;
-	for (std::map<int,Process*>::iterator it=processList.begin(); it!=processList.end(); ++it){
-		Process *start = it->second;
-		ss << start->getPageTable() << "\n";
-	}
+	// std::stringstream ss;
+	// for (std::map<int,Process*>::iterator it=processList.begin(); it!=processList.end(); ++it){
+	// 	Process *start = it->second;
+	// 	ss << start->getPageTable() << "\n";
+	// }
 
-	ss << "PHYSICAL \n";
-	for (int i = 1; i <= 20; i++){
-		Page* curr = pMem[i];
-		ss << i << "\t";
-		if(curr == NULL)
-			ss << "FREE \n";
-		else{
-			ss << "Process\t" << curr->getProcessId() << "\n";
-		}
-	}
-	return ss.str();
+	// ss << "PHYSICAL \n";
+	// for (int i = 0; i < memSize; i++){
+	// 	Page* curr = pMem[i];
+	// 	ss << i + 1 << "\t";
+	// 	if(curr == NULL)
+	// 		ss << "FREE \n";
+	// 	else{
+	// 		ss << "Process\t" << curr->getProcessId() << "\n";
+	// 	}
+	// }
+	//return ss.str();
+	return " ";
 }
 
 void OS::fromSwapToPhy(Page* target){
