@@ -11,7 +11,7 @@
 class OS{
 public:
 	enum SwapPolicy { fifo, lru, ran };
-	enum RW{ r, w};
+	enum RW{ r, w };
 	OS(SwapPolicy policy, int memSize);
 	//void setPolicy(swapPolicy);
 	void createProcess(int id);
@@ -20,18 +20,23 @@ public:
 	void write(int time, int id, int virAdd);
 	void free(int time, int id, int virAdd);
 	void kill(int id); //free all memory of procress
-	void print();
+	std::string print();
 
 private:
-	void swap(Page*);
-	void rw(int &time, int &id, int &virAdd, RW opp);
-	Page* getPage(int &id, int &virAdd);
 	std::map<int, Process*> processList; //with procress id being the key
 	SwapPolicy policy;
 	int memSize;
+	int phyCount = 0;
 	Page** pMem; //array of pages as physical Memory
+	std::vector<Page*> swapMem;	//swap memory
 
-	std::vector<Page> swapMem;	//swap memory
+	void swap(Page*);
+	void rw(int &time, int &id, int &virAdd, RW opp);
+	Page* getPage(int &id, int &virAdd);
+	int getIndexFifo();
+	int getIndexLru();
+	int getIndexRan();
+	void fromSwapToPhy(Page* target);
 
 };
 

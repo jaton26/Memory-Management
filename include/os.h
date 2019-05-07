@@ -3,9 +3,9 @@
 
 #include <vector>
 #include <map>
-#include "process.h"
-#include "page.h"
-
+#include "process.hpp"
+#include "page.hpp"
+#include <string>
 
 
 class OS{
@@ -20,7 +20,7 @@ public:
 	void write(int time, int id, int virAdd);
 	void free(int time, int id, int virAdd);
 	void kill(int id); //free all memory of procress
-	string print();
+	std::string print();
 
 private:
 	Page* getPage(int id, int virAdd);
