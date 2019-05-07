@@ -135,7 +135,7 @@ void OS::swap(Page* target){
 }
 
 int OS::getIndexFifo(){
-	
+
 	return 0;	
 }
 
@@ -145,6 +145,5 @@ int OS::getIndexLru(){
 }
 
 int OS::getIndexRan(){
-	
-	return 0;	
+	return rand() % memSize;	
 }
