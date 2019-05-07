@@ -1,5 +1,6 @@
 #include "process.hpp"
 #include <sstream>
+#include <vector>
 
 int Process::getId(){
 	return id;
@@ -23,7 +24,7 @@ Page* Process::getPage(int virAdd){
 	return pageTable[virAdd];
 }
 
-std::string Process::printPageTable(){
+std::string Process::getPageTable(){
 	std::stringstream ss;
 	ss << "PROCESS " << id << "\n";
 	for (std::map<int,Page*>::iterator it=pageTable.begin(); it!=pageTable.end(); ++it){
@@ -38,5 +39,9 @@ std::string Process::printPageTable(){
 	}
 
 	return ss.str();
+}
+
+int Process::getOneVirAdd(){
+	return pageTable.begin()->first;
 }
 

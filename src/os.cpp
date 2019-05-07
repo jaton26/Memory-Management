@@ -8,6 +8,7 @@ OS::OS(SwapPolicy policy, int memSize){
 	this->policy = policy;
 	this->memSize = memSize;
 	phyCount = 0;
+	fifoCount = 0;
 }
 
 void OS::createProcess(int id){
@@ -61,6 +62,8 @@ void OS::allocate(int id, int virAdd){
 
 	if(phyCount == memSize) //if swap is required
 		swap(newP);
+	else
+		pMem[phyCount-1] = newP;
 	//increment count to record size of physical memory
 	phyCount++;
 	//add page
@@ -88,7 +91,10 @@ void OS::free(int time, int id, int virAdd){
 }
 
 void OS::kill(int id){
-
+	Process* curr = processList[id];
+	while(!curr->empty()){
+		free(0, id, curr->getOneVirAdd());
+	}
 }
 
 std::string OS::print(){
@@ -153,8 +159,10 @@ void OS::swap(Page* target){
 }
 
 int OS::getIndexFifo(){
+	int index = fifoCount % memSize;
+	fifoCount++;
 	
-	return 0;	
+	return index;	
 }
 
 int OS::getIndexLru(){
@@ -163,6 +171,5 @@ int OS::getIndexLru(){
 }
 
 int OS::getIndexRan(){
-	
-	return 0;	
+	return rand() % memSize;	
 }
