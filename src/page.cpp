@@ -4,6 +4,8 @@
 Page::Page(int processId, int virAdd){
 	this->processId = processId;
 	this->virAdd = virAdd;
+	dirty = false;
+	swapped = false;
 }
 
 int Page::getVirAdd(){

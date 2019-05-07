@@ -33,7 +33,7 @@ std::string Process::getPageTable(){
 		if(temp->isSwapped()){
 			ss << "SWAP\t";
 		} else{
-			ss << "PHYSICAL\t" << temp->getPhyAdd();
+			ss << "PHYSICAL\t" << temp->getPhyAdd() + 1;
 		}
 		ss << "\n";
 	}

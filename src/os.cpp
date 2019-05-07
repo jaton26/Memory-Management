@@ -1,6 +1,7 @@
 #include "os.hpp"
 #include <sstream>
-
+#include <random>
+#include <iostream>
 
 
 OS::OS(SwapPolicy policy, int memSize){
@@ -62,8 +63,10 @@ void OS::allocate(int id, int virAdd){
 
 	if(phyCount == memSize) //if swap is required
 		swap(newP);
-	else
-		pMem[phyCount-1] = newP;
+	else{
+		pMem[phyCount] = newP;
+		newP->toPhysical(phyCount);
+	}
 	//increment count to record size of physical memory
 	phyCount++;
 	//add page
@@ -98,24 +101,24 @@ void OS::kill(int id){
 }
 
 std::string OS::print(){
-	// std::stringstream ss;
-	// for (std::map<int,Process*>::iterator it=processList.begin(); it!=processList.end(); ++it){
-	// 	Process *start = it->second;
-	// 	ss << start->getPageTable() << "\n";
-	// }
+	std::stringstream ss;
+	for (std::map<int,Process*>::iterator it=processList.begin(); it!=processList.end(); ++it){
+		Process *start = it->second;
+		ss << start->getPageTable() << "\n";
+	}
 
-	// ss << "PHYSICAL \n";
-	// for (int i = 0; i < memSize; i++){
-	// 	Page* curr = pMem[i];
-	// 	ss << i + 1 << "\t";
-	// 	if(curr == NULL)
-	// 		ss << "FREE \n";
-	// 	else{
-	// 		ss << "Process\t" << curr->getProcessId() << "\n";
-	// 	}
-	// }
-	//return ss.str();
-	return " ";
+	ss << "PHYSICAL \n";
+	for (int i = 0; i < memSize; i++){
+		Page* curr = pMem[i];
+		ss << i + 1 << "\t";
+		if(curr == NULL)
+			ss << "FREE \n";
+		else{
+			ss << "Process\t" << curr->getProcessId() << "\n";
+		}
+	}
+	return ss.str();
+	//return " ";
 }
 
 void OS::fromSwapToPhy(Page* target){
@@ -136,8 +139,8 @@ void OS::swap(Page* target){
 	bool foundNotDirty = false;
 
 	//find dirty page
-	for(int i = 0; i < memSize && !foundNotDirty; i++){
-		if(pMem[i]->isDirty()){
+	for(int i = 0; i < memSize && !foundNotDirty ; i++){
+		if(!pMem[i]->isDirty()){
 			indexToSwap = i;
 			foundNotDirty = true;
 		}
@@ -180,5 +183,10 @@ int OS::getIndexLru(){
 }
 
 int OS::getIndexRan(){
-	return rand() % memSize;	
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(0, memSize-1);
+	int a = dis(gen);
+	std::cout << "RANDOM _____>" << a;
+	return a;	
 }
