@@ -101,7 +101,7 @@ std::string OS::print(){
 	std::stringstream ss;
 	for (std::map<int,Process*>::iterator it=processList.begin(); it!=processList.end(); ++it){
 		Process *start = it->second;
-		ss << start->printPageTable() << "\n";
+		ss << start->getPageTable() << "\n";
 	}
 
 	ss << "PHYSICAL \n";

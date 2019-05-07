@@ -114,9 +114,9 @@ int main(){
           cout << "Error. ";
       }
     } 
-    cout << policies[0]->print() << endl;
     time++;
   }
+  cout << policies[0]->print() << endl;
   //making_page_list(list, i);
   //fifoSwap(list, time);
   return 0;
