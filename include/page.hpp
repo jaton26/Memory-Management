@@ -9,7 +9,7 @@ public:
 	void read(int time);
 	void write(int time);
 	bool isDirty();
-	
+
 	void toSwap();
 	void toPhysical(int physical);
 	bool isSwapped();

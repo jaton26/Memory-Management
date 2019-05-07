@@ -5,6 +5,7 @@ OS::OS(SwapPolicy policy, int memSize){
 	this->policy = policy;
 	this->memSize = memSize;
 	phyCount = 0;
+	fifoCount = 0;
 }
 
 void OS::createProcess(int id){
@@ -58,6 +59,8 @@ void OS::allocate(int id, int virAdd){
 
 	if(phyCount == memSize) //if swap is required
 		swap(newP);
+	else
+		pMem[phyCount-1] = newP;
 	//increment count to record size of physical memory
 	phyCount++;
 	//add page
@@ -135,8 +138,10 @@ void OS::swap(Page* target){
 }
 
 int OS::getIndexFifo(){
-
-	return 0;	
+	int index = fifoCount % memSize;
+	fifoCount++;
+	
+	return index;	
 }
 
 int OS::getIndexLru(){
