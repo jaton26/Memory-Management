@@ -31,6 +31,9 @@ void Page::toSwap(){
 	swapped = true;
 }
 
+int Page::getProcessId(){
+	return processId;
+}
 
 void Page::toPhysical(int physical){
 	swapped = false;

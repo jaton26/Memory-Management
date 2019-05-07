@@ -9,7 +9,9 @@ public:
 	void read(int time);
 	void write(int time);
 	bool isDirty();
-	
+
+	int getProcessId();
+
 	void toSwap();
 	void toPhysical(int physical);
 	bool isSwapped();
