@@ -113,8 +113,16 @@ int OS::getIndexFifo(){
 }
 
 int OS::getIndexLru(){
-	
-	return 0;	
+	int min = pMem[0]->getLastRW();
+	int indexLRU = 0;
+
+	for (int i = 1; i < memSize; i++) {
+		if (pMem[i]->getLastRW() < min) {
+			indexLRU = i;
+		}
+	}
+
+	return indexLRU;	
 }
 
 int OS::getIndexRan(){
