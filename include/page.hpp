@@ -15,6 +15,7 @@ public:
 	void toSwap();
 	void toPhysical(int physical);
 	bool isSwapped();
+	int getLastRW();
 
 private:
 	int processId;

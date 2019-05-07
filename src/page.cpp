@@ -43,3 +43,7 @@ void Page::toPhysical(int physical){
 bool Page::isSwapped(){
 	return swapped;
 }
+
+int Page::getLastRW() {
+	return lastRW;
+}
