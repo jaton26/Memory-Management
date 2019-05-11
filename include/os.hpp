@@ -38,6 +38,7 @@ private:
 	int getIndexLru();
 	int getIndexRan();
 	void fromSwapToPhy(Page* target);
+	int findFreeInPhy();
 
 };
 

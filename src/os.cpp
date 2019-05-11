@@ -1,6 +1,7 @@
 #include "os.hpp"
 #include <sstream>
-
+#include <random>
+#include <iostream>
 
 
 OS::OS(SwapPolicy policy, int memSize){
@@ -62,15 +63,27 @@ void OS::allocate(int id, int virAdd){
 
 	if(phyCount == memSize) //if swap is required
 		swap(newP);
-	else
-		pMem[phyCount-1] = newP;
+	else{
+		int index = findFreeInPhy();
+		pMem[index] = newP;
+		newP->toPhysical(index);
+		phyCount++;
+	}
 	//increment count to record size of physical memory
-	phyCount++;
+	
 	//add page
 	currPro->addPage(newP);
 	
 
 }
+
+int OS::findFreeInPhy(){
+	for(int i = 0; i < memSize; i++){
+		if(pMem[i] == NULL)
+			return i;
+	}
+}
+
 
 void OS::free(int time, int id, int virAdd){
 	//Page* currPage = getPage(id, virAdd);
@@ -83,11 +96,17 @@ void OS::free(int time, int id, int virAdd){
 	}
 
 	if(temp->isSwapped())
-		fromSwapToPhy(temp);
+		for(int i = 0; i < swapMem.size(); i++){
+			if(swapMem[i] == temp){
+				swapMem.erase(swapMem.begin()+i);
+				return;
+			}
+		}
 
 	int pIndex = temp->getPhyAdd();
 	delete temp;
 	pMem[pIndex] = NULL;
+	phyCount--;
 }
 
 void OS::kill(int id){
@@ -107,15 +126,16 @@ std::string OS::print(){
 	ss << "PHYSICAL \n";
 	for (int i = 0; i < memSize; i++){
 		Page* curr = pMem[i];
-		ss << i + 1 << "\t";
+		ss << i << "\t";
 		if(curr == NULL)
 			ss << "FREE \n";
 		else{
-			ss << "Process\t" << curr->getProcessId() << "\n";
+			ss << "Process\t" << curr->getProcessId() << " " << curr->getPhyAdd() << "\n";
 		}
 	}
 	return ss.str();
 	return " ";
+	//return " ";
 }
 
 void OS::fromSwapToPhy(Page* target){
@@ -136,8 +156,8 @@ void OS::swap(Page* target){
 	bool foundNotDirty = false;
 
 	//find dirty page
-	for(int i = 0; i < memSize && !foundNotDirty; i++){
-		if(pMem[i]->isDirty()){
+	for(int i = 0; i < memSize && !foundNotDirty ; i++){
+		if(!pMem[i]->isDirty()){
 			indexToSwap = i;
 			foundNotDirty = true;
 		}
@@ -180,5 +200,10 @@ int OS::getIndexLru(){
 }
 
 int OS::getIndexRan(){
-	return rand() % memSize;	
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(0, memSize-1);
+	int a = dis(gen);
+	std::cout << "RANDOM _____>" << a;
+	return a;	
 }
