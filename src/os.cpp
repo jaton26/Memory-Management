@@ -58,6 +58,8 @@ void OS::allocate(int id, int virAdd){
 	
 	//find process using map
 	Process* currPro = processList[id];
+	if(currPro == NULL || currPro->isKilled())
+		return; 
 
 	Page* newP = new Page(id, virAdd);
 
@@ -111,31 +113,42 @@ void OS::free(int time, int id, int virAdd){
 
 void OS::kill(int id){
 	Process* curr = processList[id];
+	if(curr == NULL)
+		return;
+
 	while(!curr->empty()){
 		free(0, id, curr->getOneVirAdd());
 	}
+	curr->kill();
 }
 
 std::string OS::print(){
 	std::stringstream ss;
 	for (std::map<int,Process*>::iterator it=processList.begin(); it!=processList.end(); ++it){
 		Process *start = it->second;
-		ss << start->getPageTable() << "\n";
+		if(start != NULL)
+			ss << start->getPageTable() << "\n";
+	}
+	
+	ss << "\nSWAP\n";
+	for (int i = 0; i < swapMem.size(); i++){
+		ss << "PROCESS\t" << swapMem[i]->getProcessId();
+		ss << "\tVIRTUAL\t\t" << swapMem[i]->getVirAdd() << "\n";
 	}
 
-	ss << "PHYSICAL \n";
+	ss << "\nPHYSICAL\n";
 	for (int i = 0; i < memSize; i++){
 		Page* curr = pMem[i];
 		ss << i << "\t";
 		if(curr == NULL)
 			ss << "FREE \n";
 		else{
-			ss << "Process\t" << curr->getProcessId() << " " << curr->getPhyAdd() << "\n";
+			ss << "PROCESS\t" << curr->getProcessId() << "\tVIRTUAL\t" << curr->getVirAdd() << "\n";
 		}
 	}
+
 	return ss.str();
-	return " ";
-	//return " ";
+
 }
 
 void OS::fromSwapToPhy(Page* target){
@@ -204,6 +217,5 @@ int OS::getIndexRan(){
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, memSize-1);
 	int a = dis(gen);
-	std::cout << "RANDOM _____>" << a;
 	return a;	
 }

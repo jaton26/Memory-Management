@@ -26,7 +26,12 @@ Page* Process::getPage(int virAdd){
 
 std::string Process::getPageTable(){
 	std::stringstream ss;
-	ss << "PROCESS " << id << "\n";
+	ss << "PROCESS " << id;
+	if (killed){
+		ss << "\tKILLED";
+		return ss.str();
+	}
+	ss << "\n";
 	for (std::map<int,Page*>::iterator it=pageTable.begin(); it!=pageTable.end(); ++it){
 		ss << "Virtual\t" << it->first << "\t";
 		Page* temp = it->second;
@@ -45,3 +50,10 @@ int Process::getOneVirAdd(){
 	return pageTable.begin()->first;
 }
 
+void Process::kill(){
+	killed = true;
+}
+
+bool Process::isKilled(){
+	return killed;
+}

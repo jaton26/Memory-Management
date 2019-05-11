@@ -18,7 +18,7 @@ int main(){
   int time = 0;
   //std::vector<Memory> list;
   
-  int memSize = 5;
+  int memSize = 20; //TODO: Change back to 20. 
   OS*policies[3];
   policies[0] = new OS(OS::fifo, memSize);
   policies[1] = new OS(OS::lru, memSize);
@@ -33,11 +33,7 @@ int main(){
     std::string action = temp;
     if(std::getline(iss,temp,' ')){
       virAdd = std::stoi(temp);
-      cout << virAdd << " ";
     }
-
-    cout << id << " ";
-    cout << action << endl;
 
     for(int i = 0; i < 3; i++){
       switch(action[0]) {
@@ -65,11 +61,11 @@ int main(){
     } 
     time++;
   }
-  cout << "Fifo:\n";
+  cout << "*************** Fifo **************\n";
   cout << policies[0]->print() << endl;
-  cout << "LRU:\n";
+  cout << "*************** LRU ***************\n";
   cout << policies[1]->print() << endl;
-  cout << "Random:\n";
+  cout << "************* Random *************\n";
   cout << policies[2]->print() << endl;
 
   return 0;
