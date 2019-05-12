@@ -28,7 +28,7 @@ std::string Process::getPageTable(){
 	std::stringstream ss;
 	ss << "PROCESS " << id;
 	if (killed){
-		ss << "\tKILLED";
+		ss << "\tKILLED\n";
 		return ss.str();
 	}
 	ss << "\n";

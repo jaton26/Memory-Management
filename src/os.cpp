@@ -143,7 +143,8 @@ std::string OS::print(){
 		if(curr == NULL)
 			ss << "FREE \n";
 		else{
-			ss << "PROCESS\t" << curr->getProcessId() << "\tVIRTUAL\t" << curr->getVirAdd() << "\n";
+			ss << "PROCESS\t" << curr->getProcessId() << "\tVIRTUAL\t" << curr->getVirAdd();
+			ss <<  (curr->isDirty()? "\tDirty": "") << "\n";
 		}
 	}
 
